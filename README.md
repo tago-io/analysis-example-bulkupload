@@ -12,10 +12,13 @@ This analysis uses an external package called json-2-csv. Because of that you mu
 * Import this [dashboard template](http://admin.tago.io/template/5d4c6ddd9723f8001b9395b4).
 * Replace the Devices for the one you created.
 * Edit the Widget, enter User Control section and change the analysis to the analysis you imported.
+* Now you can upload your CSV using the form. 
+* Any feedback about the created devices is available in the Console of the analysis.
 
-Now you can upload your CSV to the form. Here is a [CSV example](https://raw.githubusercontent.com/tago-io/analysis-example-bulkupload/master/example.csv).
+Here is a [CSV example](https://raw.githubusercontent.com/tago-io/analysis-example-bulkupload/master/example.csv).
 
 In order to get the Connector for the CSV, you must enter the [Device creation page](https://admin.tago.io/devices/connectors) and select the connector you desire. You can copy the ID from the URL of the page: https://admin.tago.io/devices/connectors/**5d1f963eeadd0b001bc91d0d**.
+
 
 ## How to Build the Analysis
 * Download this repository.
