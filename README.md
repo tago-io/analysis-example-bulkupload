@@ -4,7 +4,7 @@ Allows you to use a TagoIO Form Widget in a Dashboard to upload a CSV with devic
 This analysis uses an external package called json-2-csv. Because of that you must compile it with tago-builder before uploading to your analysis on TagoIO. More informations bellow.
 
 ## How to run the script
-* You can import the compiled file through this [analysis template](). Or follow the instructions on "How to Build the Analysis".
+* You can import the compiled file through this [analysis template](http://admin.tago.io/template/5d4c9399de7f46001bfc70cb). Or follow the instructions on "How to Build the Analysis".
 * With the analysis in your account, you must go to the Environment Variables section of the analysis.
 * Change the "Your Account Token Here" field to an account token of your account. You can generate a account token by going to the [My Accounnt](https://admin.tago.io/account) page, selecting your profile and going to the "Token" section.
 * Save the Analysis.
