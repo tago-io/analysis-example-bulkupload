@@ -54,4 +54,4 @@ async function initAnalysis(context, scope) {
   });
 }
 
-module.exports = new TagoAnalysis(initAnalysis, 'a098fcdc-dd9b-4e7b-9f9e-ba4c8bdf1017');
+module.exports = new TagoAnalysis(initAnalysis, 'ANALYSIS-TOKEN-FOR-EXTERNAL');
