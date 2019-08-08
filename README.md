@@ -22,6 +22,6 @@ In order to get the Connector for the CSV, you must enter the [Device creation p
 * Open [Node.js Installation Guide](https://nodejs.org/en/download/package-manager/) for instructions on how to install NPM and Node.js.
 * Open your favorite command-line tool like the Windows Command Prompt, PowerShell, Cygwin, Bash or the Git shell (which is installed along with Github for Windows). Then create or navigate to your new project folder.
 * Now you must install Tago SDK. Enter in your command-line `npm install`. This will start the installation of the TagoIO SDK.
-* Enter in your command-line `tago-builder analysis.js` to generate the analysis.tago.js.
+* Enter in your command-line `tago-builder analysis.js` to generate the analysis.js.tago.js.
 * Create an Analysis on your TagoIO account.
-* Upload the analysis.tago.js
+* Upload the analysis.js.tago.js
