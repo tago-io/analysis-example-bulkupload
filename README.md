@@ -15,6 +15,8 @@ This analysis uses an external package called json-2-csv. Because of that you mu
 
 Now you can upload your CSV to the form. Here is a [CSV example](https://raw.githubusercontent.com/tago-io/analysis-example-bulkupload/master/example.csv).
 
+In order to get the Connector for the CSV, you must enter the [Device creation page](https://admin.tago.io/devices/connectors) and select the connector you desire. You can copy the ID from the URL of the page: https://admin.tago.io/devices/connectors/**5d1f963eeadd0b001bc91d0d**.
+
 ## How to Build the Analysis
 * Download this repository.
 * Open [Node.js Installation Guide](https://nodejs.org/en/download/package-manager/) for instructions on how to install NPM and Node.js.
