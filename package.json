@@ -1,0 +1,17 @@
+{
+  "name": "analysis-example-bulkupload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "analysis.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "json-2-csv": "^3.5.5",
+    "tago": "^8.0.0",
+    "tago-builder": "^2.2.3"
+  }
+}
