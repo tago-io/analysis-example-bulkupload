@@ -13,7 +13,7 @@ This analysis uses an external package called json-2-csv. Because of that you mu
 * Replace the Devices for the one you created.
 * Edit the Widget, enter User Control section and change the analysis to the analysis you imported.
 
-Now you can upload your CSV to the form. Here is a CSV example:
+Now you can upload your CSV to the form. Here is a [CSV example](https://raw.githubusercontent.com/tago-io/analysis-example-bulkupload/master/example.csv).
 
 ## How to Build the Analysis
 * Download this repository.
