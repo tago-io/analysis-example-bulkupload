@@ -1,2 +1,3 @@
 node_modules/
 *.tago.js
+package-lock.json
