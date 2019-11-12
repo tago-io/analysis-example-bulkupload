@@ -60,7 +60,7 @@ async function initAnalysis(context, scope) {
   const device_list = await account.devices.list(1, ['id', 'name'], {}, 9999);
 
   for (const [index, device] of csv_json.entries()) {
-    if ( i >= 50 ) {
+    if ( i >= 40 ) {
       await account.analysis.run(context.analysis_id, [{
         file_url: file.metadata.file.url,
         index,
