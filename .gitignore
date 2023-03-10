@@ -1,5 +1,4 @@
 node_modules/
 *.tago.js
 package-lock.json
-.tago-lock.test.lock
 .tagoio
