@@ -3,7 +3,7 @@
 // const { csv2jsonAsync } = require('json-2-csv')
 
 
-import { Account, Analysis, Utils } from "@tago-io/sdk";
+import { Account, Analysis, Services, Utils } from "@tago-io/sdk";
 import { Data } from "@tago-io/sdk/out/common/common.types";
 import { TagoContext } from "@tago-io/sdk/out/modules/Analysis/analysis.types";
 import axios from "axios";
@@ -23,9 +23,9 @@ function fixKeys(item: any) {
 async function convertCSV(data_csv: string) {
   const options = {
     // use delimiter ; when exporting from excel
-    delimiter: {
-      field: ";"
-    },
+    // delimiter: {
+    //   field: ";"
+    // },
     trimFieldValues: true,
     trimHeaderFields: true
   }
@@ -69,7 +69,11 @@ async function createDevice({ account, context, device, index, connector, networ
       console.log(`Line ${index}: ${device.devicename} successfully created.`)
     })
     .catch(e => {
-      console.log(`[Error] Line ${index}: ${device.devicename} ${e}.`)
+      const notificationService = new Services({ token: context.token }).Notification
+      notificationService.send({
+        title: "Error creating devices",
+        message: `Bulk upload - Line ${index}: ${device.devicename} ${e}.`
+      })
     })
 }
 

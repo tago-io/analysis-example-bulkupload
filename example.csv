@@ -3,4 +3,4 @@ MyDevice,mutable,,
 MyDevice2,immutable,day,2
 MyDevice3,immutable,week,5
 MyDevice4,immutable,month,1
-MyDevice5,immutable,year,4
+MyDevice5,immutable,quarter,4
