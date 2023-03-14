@@ -2827,13 +2827,13 @@ async function convertCSV(data_csv) {
 }
 async function createDevice({ account, context, device, index, connector, network }) {
   if (!device.devicename) {
-    throw context.log(`Missing devicename, line ${index}`);
+    throw console.log(`Missing devicename, line ${index}`);
   } else if (!device.devicetype) {
-    throw context.log(`Missing devicetype, line ${index}`);
+    throw console.log(`Missing devicetype, line ${index}`);
   } else if (device.type === "immutable" && !device.chunkperiod) {
-    throw context.log(`Missing chunkperiod, line ${index}`);
+    throw console.log(`Missing chunkperiod, line ${index}`);
   } else if (device.type === "immutable" && !device.chunkretention) {
-    throw context.log(`Missing chunkretention, line ${index}`);
+    throw console.log(`Missing chunkretention, line ${index}`);
   }
   await account.devices.create({
     name: device.devicename,
@@ -2843,9 +2843,9 @@ async function createDevice({ account, context, device, index, connector, networ
     chunk_period: device.chunkperiod,
     chunk_retention: device.chunkretention
   }).then(() => {
-    context.log(`Line ${index}: ${device.devicename} successfully created.`);
+    console.log(`Line ${index}: ${device.devicename} successfully created.`);
   }).catch((e) => {
-    context.log(`[Error] Line ${index}: ${device.devicename} ${e}.`);
+    console.log(`[Error] Line ${index}: ${device.devicename} ${e}.`);
   });
 }
 async function startAnalysis(context, scope) {
@@ -2853,11 +2853,11 @@ async function startAnalysis(context, scope) {
   console.log("startAnalysis");
   console.log("SCOPE:", JSON.stringify(scope, null, 4));
   if (!scope) {
-    return context.log("No scope to run");
+    return console.log("No scope to run");
   }
   const environment = import_sdk.Utils.envToJson(context.environment);
   if (!environment.account_token) {
-    throw context.log("Missing account_token in Environment Variables");
+    throw console.log("Missing account_token in Environment Variables");
   }
   const account = new import_sdk.Account({ token: environment.account_token });
   const csvFormVariable = scope.find((x) => x.variable === "csv_file" && x.metadata);
@@ -2865,10 +2865,10 @@ async function startAnalysis(context, scope) {
   const network = (_b = scope.find((x) => x.variable === "network" && x.metadata)) == null ? void 0 : _b.value;
   const fileUrl = csvFormVariable.metadata.file.url;
   if (!csvFormVariable) {
-    throw context.log("No file to upload. Please upload a file to csv_file variable");
+    throw console.log("No file to upload. Please upload a file to csv_file variable");
   }
   const csv = await import_axios.default.get(fileUrl).then((res) => res.data).catch((e) => {
-    throw context.log(e.message);
+    throw console.log(e.message);
   });
   const csvJson = await convertCSV(csv);
   if (!csvJson) {
