@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./out",
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "ES2021",
+    "lib": ["ES2022"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "inlineSourceMap": true
+  },
+  "rules": {
+    "no-unused-declaration": true
+  }
+}

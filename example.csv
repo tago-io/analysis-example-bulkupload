@@ -1,3 +1,6 @@
-devicename,deviceimei,connector
-MyDevice,10000001,5d1f963eeadd0b001bc91d0d
-MyDevice2,10000002,5d1f963eeadd0b001bc91d0d
+devicename,devicetype,chunkperiod,chunkretention
+MyDevice,mutable,,
+MyDevice2,immutable,day,2
+MyDevice3,immutable,week,5
+MyDevice4,immutable,month,1
+MyDevice5,immutable,quarter,4
