@@ -1,6 +1,6 @@
-devicename,devicetype,chunkperiod,chunkretention
-MyDevice,mutable,,
-MyDevice2,immutable,day,2
-MyDevice3,immutable,week,5
-MyDevice4,immutable,month,1
-MyDevice5,immutable,quarter,4
+devicename,deviceserial,devicetype,chunkperiod,chunkretention
+MyDevice,123,mutable,,
+MyDevice2,123,immutable,day,2
+MyDevice3,123,immutable,week,5
+MyDevice4,123,immutable,month,1
+MyDevice5,123,immutable,quarter,4

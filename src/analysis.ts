@@ -46,6 +46,12 @@ interface ICreateDevice {
 async function createDevice({ account, context, device, index, connector, network }: ICreateDevice) {
   if (!device.devicename) {
     throw console.log(`Missing devicename, line ${index}`)
+  } else if (!connector) {
+    throw console.log(`Missing connector, line ${index}`)
+  } else if (!network) {
+    throw console.log(`Missing network, line ${index}`)
+  } else if (!device.deviceserial) {
+    throw console.log(`Missing deviceserial, line ${index}`)
   } else if (!device.devicetype) {
     throw console.log(`Missing devicetype, line ${index}`)
   } else if (device.type === "immutable" && !device.chunkperiod) {
@@ -62,6 +68,7 @@ async function createDevice({ account, context, device, index, connector, networ
       type: device.devicetype,
       chunk_period: device.chunkperiod,
       chunk_retention: device.chunkretention,
+      serie_number: String(device.deviceserial),
 
       // tags: [ { key: device.key, value: device.tag }],
     })
@@ -97,8 +104,8 @@ async function startAnalysis(context: TagoContext, scope: Data[]) {
 
   // Get the bulk import form data.
   const csvFormVariable = scope.find(x => x.variable === 'csv_file' && x.metadata)
-  const connector = scope.find(x => x.variable === 'connector' && x.metadata)?.value as string
-  const network = scope.find(x => x.variable === 'network' && x.metadata)?.value as string
+  const connector = scope.find(x => x.variable === 'connector_id')?.value as string
+  const network = scope.find(x => x.variable === 'network_id')?.value as string
 
   const fileUrl = csvFormVariable.metadata.file.url
 
@@ -133,7 +140,7 @@ async function startAnalysis(context: TagoContext, scope: Data[]) {
   createDeviceQueue.error((err) => console.log(err))
 
   for (const [i, device] of csvJson.entries()) {
-    const index = i + 1
+    const index = i + 2
 
     if (deviceList.find(x => x.name === device.devicename)) {
       continue
