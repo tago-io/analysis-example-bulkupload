@@ -3,12 +3,12 @@
 // const { csv2jsonAsync } = require('json-2-csv')
 
 
-import { Account, Analysis, Services, Utils } from "@tago-io/sdk";
-import { Data } from "@tago-io/sdk/out/common/common.types";
-import { TagoContext } from "@tago-io/sdk/out/modules/Analysis/analysis.types";
-import axios from "axios";
-import { csv2jsonAsync } from "json-2-csv";
 import { queue } from "async";
+import axios from "axios";
+import { csv2json } from "json-2-csv";
+
+import { Analysis, Resources, Services, Utils } from "@tago-io/sdk";
+import { Data, TagoContext } from "@tago-io/sdk/lib/types";
 
 // Fix the keys of the JSON object.
 function fixKeys(item: any) {
@@ -29,12 +29,11 @@ async function convertCSV(data_csv: string) {
     trimFieldValues: true,
     trimHeaderFields: true
   }
-  const result = await csv2jsonAsync(data_csv, options)
+  const result = await csv2json(data_csv, options)
   return result.map((item) => fixKeys(item))
 }
 
 interface ICreateDevice {
-  account: Account
   context: TagoContext
   device: any
   index: number
@@ -43,7 +42,7 @@ interface ICreateDevice {
 }
 
 // Create the device.
-async function createDevice({ account, context, device, index, connector, network }: ICreateDevice) {
+async function createDevice({ context, device, index, connector, network }: ICreateDevice) {
   if (!device.devicename) {
     throw console.log(`Missing devicename, line ${index}`)
   } else if (!connector) {
@@ -60,7 +59,7 @@ async function createDevice({ account, context, device, index, connector, networ
     throw console.log(`Missing chunkretention, line ${index}`)
   }
 
-  await account.devices
+  await Resources.devices
     .create({
       name: device.devicename,
       connector,
@@ -69,8 +68,7 @@ async function createDevice({ account, context, device, index, connector, networ
       chunk_period: device.chunkperiod,
       chunk_retention: device.chunkretention,
       serie_number: String(device.deviceserial),
-
-      // tags: [ { key: device.key, value: device.tag }],
+      // tags: [{ key: "serial", value: device.deviceserial || "" }],
     })
     .then(() => {
       console.log(`Line ${index}: ${device.devicename} successfully created.`)
@@ -86,11 +84,11 @@ async function createDevice({ account, context, device, index, connector, networ
 
 // Starting function for the analysis
 async function startAnalysis(context: TagoContext, scope: Data[]) {
-  console.log('startAnalysis')
-  console.log('SCOPE:', JSON.stringify(scope, null, 4))
+  console.log('Starting analysis')
+  // console.log('SCOPE:', JSON.stringify(scope, null, 4))
 
   if (!scope) {
-    return console.log('No scope to run')
+    return console.log('This analysis must be triggered by an Input Form on a Dashboard.')
   }
 
   // Get the environment variables from TagoIO Analysis.
@@ -98,9 +96,6 @@ async function startAnalysis(context: TagoContext, scope: Data[]) {
   if (!environment.account_token) {
     throw console.log('Missing account_token in Environment Variables')
   }
-
-  // Create the Tago Account object.
-  const account = new Account({ token: environment.account_token })
 
   // Get the bulk import form data.
   const csvFormVariable = scope.find(x => x.variable === 'csv_file' && x.metadata)
@@ -128,7 +123,7 @@ async function startAnalysis(context: TagoContext, scope: Data[]) {
   }
 
   // Get the list of devices.
-  const deviceList = await account.devices.list({
+  const deviceList = await Resources.devices.list({
     // page: 1, 
     fields: ['id', 'name'],
     filter: {},
@@ -146,7 +141,7 @@ async function startAnalysis(context: TagoContext, scope: Data[]) {
       continue
     }
 
-    createDeviceQueue.push({ account, context, index, device, connector, network })
+    createDeviceQueue.push({ context, index, device, connector, network })
   }
 
   await createDeviceQueue.drain()

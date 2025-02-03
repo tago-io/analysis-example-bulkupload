@@ -2,3 +2,5 @@ node_modules/
 *.tago.js
 package-lock.json
 .tagoio
+.tago-lock.tago@tago.lock
+tagoconfig.json
