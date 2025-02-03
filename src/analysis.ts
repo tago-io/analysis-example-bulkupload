@@ -1,8 +1,3 @@
-// const { Analysis, Account, Utils } = require('@tago-io/sdk')
-// const axios = require('axios')
-// const { csv2jsonAsync } = require('json-2-csv')
-
-
 import { queue } from "async";
 import axios from "axios";
 import { csv2json } from "json-2-csv";
